@@ -10,11 +10,13 @@ ENV AWG_GO=v0.2.12
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Sync base packages with current repo state
+RUN apk update && apk upgrade --available && rm -rf /var/cache/apk/*
+
 # Setup base
 # hadolint ignore=DL3003
 RUN \
-    apk upgrade --no-cache \
-    && apk add --no-cache --virtual .build-dependencies \
+    apk add --no-cache --virtual .build-dependencies \
         build-base \
         linux-headers \
         git \
