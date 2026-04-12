@@ -14,15 +14,15 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
+        build-base \
         linux-headers \
-        git=2.45.2-r0 \
+        git \
     \
     && apk add --no-cache \
-        go=1.22.10-r0 \
-        iptables=1.8.10-r3 \
-        libqrencode-tools=4.1.1-r2 \
-        openresolv=3.13.2-r0 \
+        go \
+        iptables \
+        libqrencode-tools \
+        openresolv \
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
