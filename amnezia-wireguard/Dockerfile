@@ -27,6 +27,7 @@ RUN \
         libqrencode-tools \
         openresolv \
     \
+    && printf '#!/bin/sh\nexit 0\n' > /sbin/resolvconf && chmod +x /sbin/resolvconf \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
     && git clone --depth=1 --branch $AWG_TOOLS \
