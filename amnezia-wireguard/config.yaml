@@ -1,6 +1,6 @@
 ---
 name: AmneziaWG Client
-version: 0.1.5
+version: 0.1.6
 slug: wireguard_client
 description: AmneziaWG client for Home Assistant
 url: https://github.com/nezg/addon-amnezia-wireguard-client
@@ -13,7 +13,6 @@ hassio_api: true
 host_network: true
 privileged:
   - NET_ADMIN
-  - SYS_ADMIN
 devices:
   - /dev/net/tun
 map:
