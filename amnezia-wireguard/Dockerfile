@@ -23,6 +23,7 @@ RUN \
     \
     && apk add --no-cache \
         go \
+		iproute2 \
         iptables \
         libqrencode-tools \
         openresolv \
