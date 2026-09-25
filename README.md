@@ -4,6 +4,25 @@
 
 This fork turns the original add-on into a **client for connecting Home Assistant to an AmneziaWG server**.
 
+## Why AmneziaWG?
+
+AmneziaWG is based on WireGuard but adds additional obfuscation parameters designed to make WireGuard traffic less recognizable to network filtering and traffic inspection systems.
+
+Compared with standard WireGuard, AmneziaWG 3.1 adds parameters such as:
+
+- `Jc`, `Jmin`, `Jmax` — packet junk/obfuscation parameters
+- `S1`–`S4` — additional packet size/structure obfuscation
+- `H1`–`H4` — packet header obfuscation
+- `HeaderProtectionKey` — additional header protection
+- `I1`–`I5` — additional handshake/instruction parameters
+- `RandomTrailers` — random packet trailers
+- `DisableCookies` — Amnezia-specific cookie handling
+- Additional handshake and rekey parameters
+
+These parameters are **not part of standard WireGuard** and require an AmneziaWG-compatible server.
+
+If you only need a standard WireGuard connection, use the existing [WireGuard Client add-on](https://github.com/bigmoby/addon-wireguard-client) instead.
+
 ## Tested
 
 - Home Assistant OS
@@ -31,8 +50,7 @@ The add-on accepts the AmneziaWG parameters required by the client configuration
 
 The tunnel interface is created automatically as **`wg0`**.
 
-By default, AllowedIPs can be configured for a full-tunnel connection:
-
+For a full-tunnel connection, use:
 ```text
 AllowedIPs = 0.0.0.0/0, ::/0
 ```
