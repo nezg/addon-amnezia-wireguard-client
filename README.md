@@ -1,3 +1,45 @@
+# AmneziaWG Client for Home Assistant
+
+**Client-only Home Assistant add-on for AmneziaWG (protocol version 3.1).**
+
+This fork turns the original add-on into a **client for connecting Home Assistant to an AmneziaWG server**.
+
+## Tested
+
+- Home Assistant OS
+- Home Assistant Core **2026.9.3**
+- Architecture: **aarch64**
+- AmneziaWG **3.1**
+- Kernel mode with automatic fallback to the userspace implementation
+
+## Configuration
+
+The easiest way to get the required connection parameters is to create a working **AmneziaWG 3.1** connection in **AmneziaVPN** and transfer its client settings to the add-on.
+
+The add-on accepts the AmneziaWG parameters required by the client configuration, including:
+
+- Private/Public keys
+- Address and DNS
+- Jc / Jmin / Jmax
+- S1–S4
+- H1–H4
+- HeaderProtectionKey
+- Rekey and handshake parameters
+- Peer public key and PresharedKey
+- Endpoint and PersistentKeepalive
+- AllowedIPs
+
+The tunnel interface is created automatically as **`wg0`**.
+
+By default, AllowedIPs can be configured for a full-tunnel connection:
+
+```text
+AllowedIPs = 0.0.0.0/0, ::/0
+```
+The original project documentation is preserved below.
+
+---
+
 # AmneziaWG
 
 AmneziaWG (AmneziaWireGuard) is a fork of the regular WireGuard-Go with the addition of functions to bypass blocking and reduce the likelihood of protocol detection. One of the key features of AmneziaWG is backward compatibility with WireGuard. This means that when using AmneziaWG, unless the configuration specifies specific parameters for protocol obfuscation, it will act as a standard WireGuard.
