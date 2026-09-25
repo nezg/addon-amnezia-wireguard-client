@@ -3,9 +3,9 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/base:21.0.0
 FROM ${BUILD_FROM}
 
 # Amnezia Wireguart Tools version
-ENV AWG_TOOLS=v1.0.20241018
+ENV AWG_TOOLS=v3.1.20260812
 # Amnezia WG GO version
-ENV AWG_GO=v0.2.12
+ENV AWG_GO=v3.1.20260828
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
