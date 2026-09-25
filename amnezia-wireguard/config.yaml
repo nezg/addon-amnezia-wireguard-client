@@ -1,6 +1,6 @@
 ---
 name: AmneziaWG Client
-version: 0.1.6
+version: 0.1.7
 slug: wireguard_client
 description: AmneziaWG client for Home Assistant
 url: https://github.com/nezg/addon-amnezia-wireguard-client
@@ -20,7 +20,6 @@ map:
 
 options:
   client:
-    interface: wg0
     address: CLIENT_VPN_IP/32
     dns:
       - 1.1.1.1
@@ -65,7 +64,6 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   client:
-    interface: match(^wg([0-9])+$)?
     address: str
     dns:
       - str

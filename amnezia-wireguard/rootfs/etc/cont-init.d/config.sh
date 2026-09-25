@@ -4,7 +4,7 @@ declare config
 declare interface
 declare value
 
-interface=$(bashio::config "client.interface")
+interface="wg0"
 config="/etc/amnezia/amneziawg/${interface}.conf"
 
 mkdir -p /etc/amnezia/amneziawg || \
