@@ -8,6 +8,9 @@ bashio::log.info "Starting AmneziaWG client..."
 
 export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1
 
+sed -i 's/^\[\[ \$proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1$/true/' \
+    "$(command -v awg-quick)"
+
 interface=$(bashio::config "client.interface")
 
 echo "--- AmneziaWG client configuration ---"
