@@ -1,6 +1,6 @@
 ---
 name: AmneziaWG Client
-version: 0.1.0
+version: 0.1.1
 slug: wireguard_client
 description: AmneziaWG client for Home Assistant
 url: https://github.com/nezg/addon-amnezia-wireguard-client
