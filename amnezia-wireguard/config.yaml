@@ -1,23 +1,14 @@
 ---
-name: AmneziaWG
+name: AmneziaWG Client
 version: dev
-slug: wireguard
-description: WireGuard-Go fork with protection against DPI systems.
-url: https://github.com/JohnMcLear/addon-amnezia-wireguard
-codenotary: codenotary@frenck.dev
+slug: wireguard_client
+description: AmneziaWG client for Home Assistant
+url: https://github.com/nezg/addon-amnezia-wireguard-client
 arch:
   - aarch64
   - amd64
   - armv7
 init: false
-ports:
-  80/tcp: null
-  51820/udp: 51820
-  51821/udp: 51821
-ports_description:
-  80/tcp: WireGuard peers status API
-  51820/udp: "WireGuard: forward this port in your router"
-  51821/udp: "Auxiliary port for the peer"
 hassio_api: true
 privileged:
   - NET_ADMIN
@@ -25,66 +16,90 @@ devices:
   - /dev/net/tun
 map:
   - ssl:rw
+
 options:
-  server:
-    host: myautomatedhome.duckdns.org
-    addresses:
-      - 172.27.66.1
-    dns: []
-  peers:
-    - name: hassio
-      addresses:
-        - 172.27.66.2
-      allowed_ips: []
-      client_allowed_ips: []
-      ping_address: 172.27.66.2
-  amnezia:
-    junk_packet_count: 3
-    junk_packet_min_size: 100
-    junk_packet_max_size: 1000
+  client:
+    interface: wg0
+    address: 10.9.1.18/32
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    private_key: ""
+
+    jc: 5
+    jmin: 10
+    jmax: 50
+
+    s1: 12
+    s2: 12
+    s3: 12
+    s4: 12
+
+    h1: 1
+    h2: 2
+    h3: 3
+    h4: 4
+
+    i1: ""
+    header_protection_key: ""
+
+    rekey_after_time: "100-120"
+    rekey_timeout: "3-7"
+    reject_after_time: "150-180"
+    keepalive_timeout: "5-15"
+    max_handshake_attempts: "15-20"
+
+    random_trailers: true
+    disable_cookies: true
+
+    peer:
+      public_key: ""
+      preshared_key: ""
+      allowed_ips:
+        - 0.0.0.0/0
+        - ::/0
+      endpoint: "13.143.193.29:44736"
+      persistent_keepalive: 30
+
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-  server:
-    host: str
+  client:
     interface: match(^wg([0-9])+$)?
-    addresses:
-      - str
+    address: str
     dns:
       - str
     private_key: password?
-    public_key: str?
-    fwmark: str?
-    table: str?
-    pre_up: str?
-    pre_down: str?
-    post_up: str?
-    post_down: str?
-    mtu: int?
-    listen_port: int?
-  peers:
-    - name: match(^[a-zA-Z0-9\d](?:[a-zA-Z0-9\d]|-(?=[a-zA-Z0-9\d])){0,32}$)
-      private_key: str?
-      public_key: str?
-      addresses:
-        - str
+
+    jc: int
+    jmin: int
+    jmax: int
+
+    s1: int
+    s2: int
+    s3: int
+    s4: int
+
+    h1: int
+    h2: int
+    h3: int
+    h4: int
+
+    i1: str?
+    header_protection_key: password?
+
+    rekey_after_time: str?
+    rekey_timeout: str?
+    reject_after_time: str?
+    keepalive_timeout: str?
+    max_handshake_attempts: str?
+
+    random_trailers: bool
+    disable_cookies: bool
+
+    peer:
+      public_key: str
+      preshared_key: password?
       allowed_ips:
         - str
-      client_allowed_ips:
-        - str
-      persistent_keep_alive: int?
-      endpoint: str?
-      pre_shared_key: str?
-      fwmark: str?
-      ping_address: str?
-  amnezia:
-    junk_packet_count: int
-    junk_packet_min_size: int
-    junk_packet_max_size: int
-    init_packet_junk_size: int?
-    response_packet_junk_size: int?
-    init_packet_magic_header: int?
-    response_packet_magic_header: int?
-    transport_packet_magic_header: int?
-    uload_packet_magic_header: int?
-
-
+      endpoint: str
+      persistent_keepalive: int
