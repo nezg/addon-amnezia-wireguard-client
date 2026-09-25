@@ -1,6 +1,6 @@
 ---
 name: AmneziaWG Client
-version: 0.1.3
+version: 0.1.4
 slug: wireguard_client
 description: AmneziaWG client for Home Assistant
 url: https://github.com/nezg/addon-amnezia-wireguard-client
@@ -13,6 +13,8 @@ hassio_api: true
 privileged:
   - NET_ADMIN
   - SYS_ADMIN
+sysctls:
+  net.ipv4.conf.all.src_valid_mark: 1
 devices:
   - /dev/net/tun
 map:
@@ -21,7 +23,7 @@ map:
 options:
   client:
     interface: wg0
-    address: 10.9.1.18/32
+    address: CLIENT_VPN_IP/32
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -41,8 +43,8 @@ options:
     h3: 3
     h4: 4
 
-    i1: ""
-    header_protection_key: ""
+    i1: "YOUR_I1_VALUE"
+    header_protection_key: "YOUR_HEADER_PROTECTION_KEY"
 
     rekey_after_time: "100-120"
     rekey_timeout: "3-7"
@@ -54,12 +56,12 @@ options:
     disable_cookies: true
 
     peer:
-      public_key: ""
-      preshared_key: ""
+      public_key: "SERVER_PUBLIC_KEY"
+      preshared_key: "YOUR_PRESHARED_KEY"
       allowed_ips:
         - 0.0.0.0/0
         - ::/0
-      endpoint: "13.143.193.29:44736"
+      endpoint: "SERVER_IP:SERVER_PORT"
       persistent_keepalive: "25-35"
 
 schema:
